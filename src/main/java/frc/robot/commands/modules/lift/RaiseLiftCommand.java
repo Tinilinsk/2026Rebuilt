@@ -1,13 +1,13 @@
-package frc.robot.commands.moduls.lift;
+package frc.robot.commands.modules.lift;
 
 import frc.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class LowerLiftCommand extends Command {
+public class RaiseLiftCommand extends Command {
     private final Lift lift;
 
-    public LowerLiftCommand(Lift lift) {
+    public RaiseLiftCommand(Lift lift) {
         this.lift = lift;
     }
 
@@ -18,7 +18,7 @@ public class LowerLiftCommand extends Command {
 
     @Override
     public void execute() {
-         lift.runDown();   
+         lift.runUp();   
     }
 
     @Override

@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.Constants.OperatorConstants;
-
+import frc.robot.commands.modules.lift.LowerLiftCommand;
+import frc.robot.commands.modules.lift.RaiseLiftCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -25,8 +26,6 @@ import java.util.List;
 import java.util.function.DoubleSupplier;
 
 import frc.robot.subsystems.Lift;
-import frc.robot.commands.moduls.lift.LowerLiftCommand;
-import frc.robot.commands.moduls.lift.RaiseLiftCommand;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.GoalEndState;
