@@ -35,7 +35,9 @@ public final class Constants {
   }
 
   public static final class LiftConstants {
-    public static final int kLiftSparkMaxPort = 18;
+    public static final int kLeftLiftSparkMaxPort = 18;
+    public static final int kRightLiftSparkMaxPort = 16;
+    public static final double kVoltageLift = 11.5;
   }
 
   public static final class AutoConstants {
