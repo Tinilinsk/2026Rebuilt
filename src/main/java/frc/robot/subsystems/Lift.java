@@ -12,24 +12,32 @@ import frc.robot.Constants.LiftConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Lift extends SubsystemBase {
-    private final SparkMax liftLeftMotor = new SparkMax(LiftConstants.kLiftSparkMaxPort, MotorType.kBrushed);
-    private final SparkMaxConfig liftMotorConfig = new SparkMaxConfig();
+    private final SparkMax liftLeftMotor = new SparkMax(LiftConstants.kLeftLiftSparkMaxPort, MotorType.kBrushed);
+    private final SparkMax liftRightMotor = new SparkMax(LiftConstants.kRightLiftSparkMaxPort, MotorType.kBrushed);
+
+    private final SparkMaxConfig liftLeftMotorConfig = new SparkMaxConfig();
+    private final SparkMaxConfig liftRightMotorConfig = new SparkMaxConfig();
 
     public Lift() {
-        liftMotorConfig.inverted(false).idleMode(IdleMode.kBrake);
+        liftLeftMotorConfig.inverted(false).idleMode(IdleMode.kBrake);
+        liftRightMotorConfig.inverted(false).idleMode(IdleMode.kBrake);
 
-        liftLeftMotor.configure(liftMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        liftLeftMotor.configure(liftLeftMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        liftRightMotor.configure(liftRightMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     public void runUp() {
-        liftLeftMotor.setVoltage(11);
+        liftLeftMotor.setVoltage(LiftConstants.kVoltageLift);
+        liftRightMotor.setVoltage(LiftConstants.kVoltageLift);
     }
 
     public void runDown() {
-        liftLeftMotor.setVoltage(-11);
+        liftLeftMotor.setVoltage(-LiftConstants.kVoltageLift);
+        liftRightMotor.setVoltage(-LiftConstants.kVoltageLift);
     }
 
     public void stop() {
         liftLeftMotor.setVoltage(0);
+        liftRightMotor.setVoltage(0);
     }
 }
