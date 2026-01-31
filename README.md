@@ -53,5 +53,5 @@ The project automatically downloads these libraries (defined in `vendordeps/`):
 
 * **Left Stick:** Drive (Translation)
 * **Right Stick:** Rotate
-* **Button A:** Lift UP (Voltage Control)
-* **Button X:** Lift DOWN (Voltage Control)
+* **Button A:** Lift DOWN (Voltage Control)
+* **Button X:** Lift UP (Voltage Control)
