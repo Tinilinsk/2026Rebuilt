@@ -53,6 +53,4 @@ The project automatically downloads these libraries (defined in `vendordeps/`):
 
 * **Left Stick:** Drive 
 * **Right Stick:** Rotate
-* **Button X:** Lift Up
-* **Button B:** Lift Down
 * **Button A:** Reset Gyroscope 
