@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.modules.intake.IntakeOnCommand;
 import frc.robot.commands.modules.intake.IntakeDropCommand;
+import frc.robot.commands.modules.intake.IntakeReverseCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -113,8 +114,10 @@ public class RobotContainer {
                 driverXbox.start().whileTrue(Commands.none());
                 driverXbox.back().whileTrue(Commands.none());
 
-                // Hold right trigger for intake
-                driverXbox.rightTrigger(0.4).whileTrue(new IntakeOnCommand(intake));
+                // Hold right bumper for intake
+                driverXbox.rightBumper().whileTrue(new IntakeOnCommand(intake));
+                // Hold left bumper for intake reverse
+                driverXbox.leftBumper().whileTrue(new IntakeReverseCommand(intake));
 
                 // Hold right trigger for intake drop
                 driverXbox.b().whileTrue(new IntakeDropCommand(intakeDrop));
