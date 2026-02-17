@@ -27,6 +27,10 @@ public class Intake extends SubsystemBase {
         intakeMotor.set(IntakeConstants.kPercentOutputIntake);
     }
 
+    public void reverse() {
+        intakeMotor.set(-IntakeConstants.kPercentOutputIntake);
+    }
+
     public void stop() {
         intakeMotor.set(0);
     }
