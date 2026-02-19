@@ -14,6 +14,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.modules.intake.IntakeOnCommand;
 import frc.robot.commands.modules.intake.IntakeDropCommand;
 import frc.robot.commands.modules.intake.IntakeReverseCommand;
+import frc.robot.commands.modules.shooting.Shoot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -28,6 +29,7 @@ import java.util.function.DoubleSupplier;
 
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeDrop;
+import frc.robot.subsystems.Shooting;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.GoalEndState;
@@ -55,6 +57,7 @@ public class RobotContainer {
 
         private final Intake intake = new Intake();
         private final IntakeDrop intakeDrop = new IntakeDrop();
+        private final Shooting shooting = new Shooting();
 
         /**
          * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -120,9 +123,14 @@ public class RobotContainer {
                 driverXbox.leftBumper().whileTrue(new IntakeReverseCommand(intake));
 
                 // Hold right trigger for intake drop
-                driverXbox.b().whileTrue(new IntakeDropCommand(intakeDrop));
+                driverXbox.a().whileTrue(new IntakeDropCommand(intakeDrop));
           
                 // Drive to pose
+                
+                // Shooting command
+                driverXbox.b().whileTrue(new Shoot(shooting));
+
+                //drive to pose
                 driverXbox.y().onTrue(drivebase.driveToClosestPose());
         }
 
