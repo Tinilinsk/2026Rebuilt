@@ -61,6 +61,9 @@ public final class Constants {
     public static final double kPercentOutputSorting = -0.20;
     public static final double kPercentOutputPassthrough = -0.45;
     public static final double kPercentOutputShooter = -0.55;
+
+    // Velocity under which we speed up the shooter (RPM)
+    public static final double kShooterMinimumVelocity = -3200;
   }
 
   public static final class AutoConstants {
