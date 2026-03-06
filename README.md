@@ -8,12 +8,7 @@ This repository contains the code for the FRC 9155 robot for the 2026 season.
 * **Drive Motors:** NEO Brushless (controlled by Spark Max)
 * **Angle Motors:** NEO Brushless (controlled by Spark Max)
 * **Absolute Encoders:** CTRE CANCoders
-* **Gyro (IMU):** NavX-MXP (SPI)
-
-### Lift Mechanism
-* **Motors:** 2x Brushed Motors (CIM / 775pro / Bag)
-* **Controllers:** 2x REV Spark Max
-* **Mode:** Leader-Follower (Brushed Mode)
+* **Gyro (IMU):** Pigeon2
 
 ---
 
@@ -54,3 +49,10 @@ The project automatically downloads these libraries (defined in `vendordeps/`):
 * **Left Stick:** Drive 
 * **Right Stick:** Rotate
 * **Button A:** Reset Gyroscope 
+* **Right Bumper** Intake
+* **Button X** Drop Intake
+* **D-pad Up** Sort & Pass (without shooting)
+* **Y Button** Drive to closest shooting pose
+
+* **Left Bumper** Reverse Intake
+* **D-pad Down** Reverse Sort & Pass
