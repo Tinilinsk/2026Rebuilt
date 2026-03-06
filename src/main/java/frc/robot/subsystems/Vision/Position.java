@@ -16,8 +16,6 @@ public class Position extends SubsystemBase {
     public static boolean doRejectUpdate = false;
     public static boolean twoTags = false;
 
-    private final Pigeon2 m_gyro = new Pigeon2(20);
-
     public Position(SwerveDrive swerveDrive) {
         this.swerveDrive = swerveDrive;
     }
@@ -27,13 +25,7 @@ public void updateOdometryWithVision() {
     // Aktualizacja czystej odometrii
     swerveDrive.updateOdometry();
 
-        // ustawienie headingu w Limelight
-        LimelightHelpers.SetRobotOrientation(
-            "limelight",
-            m_gyro.getYaw().getValueAsDouble(), 
-            0, 0, 0, 0, 0
-        );
-        
+    double yaw = swerveDrive.getYaw().getDegrees();
 
         // odczyt MegaTag2
         LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
