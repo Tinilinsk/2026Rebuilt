@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    Constants.initOptions();
+    Constants.refresh();
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -77,6 +79,8 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    Constants.refresh();
 
     SmartDashboard.putNumber("X Rotation", navx.getPitch());
     SmartDashboard.putNumber("Y Rotation", navx.getRoll());
