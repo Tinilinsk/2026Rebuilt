@@ -93,7 +93,7 @@ public final class Constants {
     public static final int kIntakeSparkMaxPort = 10;
     public static double kPercentOutputIntake = 0.50;
 
-    public static double kIntakeAccel = 4.0;
+    public static double kIntakeAccel = 3.0;
   }
 
   public static final class IntakeDropConstants {
