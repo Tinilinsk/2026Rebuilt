@@ -98,6 +98,8 @@ public final class Constants {
 
   public static final class IntakeDropConstants {
     // We will have to change these later
+    public static final int kIntakeDropLimitSwitchPort = 1;
+
     public static final int kIntakeDropSparkMaxPort = 13;
     public static double kPercentOutputIntakeDrop = 0.70;
 
