@@ -17,15 +17,28 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Escape"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Escape"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeDrop"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Blue",
+  "folder": null,
   "choreoAuto": false
 }

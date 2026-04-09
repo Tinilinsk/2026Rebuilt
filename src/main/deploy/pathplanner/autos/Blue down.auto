@@ -11,27 +11,28 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right Fuel"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeDrop"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Fuel"
+                }
+              }
+            ]
           }
         },
         {
           "type": "wait",
           "data": {
             "waitTime": 3.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right to shoot"
           }
         },
         {
@@ -44,6 +45,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Blue",
+  "folder": null,
   "choreoAuto": false
 }
