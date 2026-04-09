@@ -38,6 +38,7 @@ public class Shooting extends SubsystemBase {
     private double shooterTargetSpeed = 0.0;
     private boolean shootingActive = false;
     private boolean feedersEnabled = false;
+    private boolean emergencyOverride = false;
 
     public Shooting() {
         sortingMotorConfig.inverted(false).idleMode(IdleMode.kBrake);
@@ -58,8 +59,27 @@ public class Shooting extends SubsystemBase {
         shooterTargetSpeed = getShooterSpeedFromLiveTagDistance();
     }
 
+    public void setEmergencyOverride(boolean override) {
+        emergencyOverride = override;
+        if (override) {
+            shootingActive = false;
+            feedersEnabled = false;
+            shooterTargetSpeed = 0.0;
+        }
+    }
+
+    public void runEmergencyRaw() {
+        shooterMotor.set(ShootingConstants.kPercentOutputShooter);
+        sortingMotor.set(ShootingConstants.kPercentOutputSorting);
+        passthroughMotor.set(ShootingConstants.kPercentOutputPassthrough);
+    }
+
     @Override
     public void periodic() {
+        if (emergencyOverride) {
+            return;
+        }
+
         double shooterOutput = rateLimiter.calculate(shooterTargetSpeed);
         shooterMotor.set(shooterOutput);
         SmartDashboard.putNumber("Shooter/AppliedOutput", shooterOutput);
@@ -81,6 +101,12 @@ public class Shooting extends SubsystemBase {
     public void sortAndPassReverse() {
         sortingMotor.set(-ShootingConstants.kPercentOutputSorting);
         passthroughMotor.set(-ShootingConstants.kPercentOutputPassthrough);
+    }
+
+    public void reverseShoot() {
+        sortingMotor.set(-ShootingConstants.kPercentOutputSorting);
+        passthroughMotor.set(-ShootingConstants.kPercentOutputPassthrough);
+        shooterMotor.set(-ShootingConstants.kPercentOutputShooter);
     }
 
     public void stop() {
