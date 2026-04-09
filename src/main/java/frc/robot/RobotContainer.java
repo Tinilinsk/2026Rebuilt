@@ -18,7 +18,10 @@ import frc.robot.commands.modules.intake.IntakeOnCommand;
 import frc.robot.commands.modules.intake.IntakeDropCloseCommand;
 import frc.robot.commands.modules.intake.IntakeDropCommand;
 import frc.robot.commands.modules.intake.IntakeReverseCommand;
+import frc.robot.commands.modules.shooting.AimAndShoot;
+import frc.robot.commands.modules.shooting.EmergencyShoot;
 import frc.robot.commands.modules.shooting.Shoot;
+import frc.robot.commands.modules.shooting.ShootReverse;
 import frc.robot.commands.modules.shooting.SortAndPass;
 import frc.robot.commands.modules.shooting.SortAndPassReverse;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -102,7 +105,7 @@ public class RobotContainer {
                 // Configure the trigger bindings
                 configureBindings();
                 DriverStation.silenceJoystickConnectionWarning(true);
-                NamedCommands.registerCommand("Shoot", new ShootTimed(shooting, 2.0));
+                NamedCommands.registerCommand("Shoot", new AimAndShoot(drivebase, shooting).withTimeout(2.0));
                 NamedCommands.registerCommand("SortAndPass", new SortAndPassTimed(shooting, 2.0));
                 NamedCommands.registerCommand("IntakeOn", new IntakeOnCommandTimed(intake, 2.0));
                 NamedCommands.registerCommand("IntakeDrop", new IntakeDropCommandTimed(intakeDrop, 2.0));
@@ -151,31 +154,17 @@ public class RobotContainer {
                 driverXbox.x().whileTrue(new IntakeDropCommand(intakeDrop));
                 driverXbox.povLeft().whileTrue(new IntakeDropCloseCommand(intakeDrop));
 
+                // Emergency shoot bypassing all normal targeting
+                supportXbox.y().whileTrue(new EmergencyShoot(shooting));
+
                 // Shooting command: first faces the basket, then calculates speed and shoots, no translation
-                driverXbox.b().onTrue(Commands.runOnce(drivebase::cancelAimAndDrive));
-                driverXbox.b().whileTrue(
-                        Commands.sequence(
-                                Commands.runOnce(() -> drivebase.saveTowerHeading()),
-                                Commands.run(() -> drivebase.faceSavedTarget(), drivebase)
-                                        .until(drivebase::isFacingSavedTarget),
-                                Commands.runOnce(() -> shooting.startShooting(), shooting),
-                                Commands.runEnd(
-                                        () -> drivebase.faceSavedTarget(),
-                                        () -> shooting.stop(),
-                                        drivebase, shooting)
-                        )
-                );
+                supportXbox.b().whileTrue(new AimAndShoot(drivebase, shooting));
                 driverXbox.povLeft().whileTrue(new IntakeDropCloseCommand(intakeDrop));
 
                 // Shooting commands without shooting (pov = dpad btw)
                 supportXbox.povUp().whileTrue(new SortAndPass(shooting));
                 supportXbox.povDown().whileTrue(new SortAndPassReverse(shooting));
-                
-                //drive to pose
-                driverXbox.y()
-                                .and(driverXbox.b().negate())
-                                .onTrue(Commands.runOnce(drivebase::startAimAndDrive));
-                driverXbox.povRight().onTrue(Commands.runOnce(this::cancelDrivebaseCurrentCommand));
+                supportXbox.x().whileTrue(new ShootReverse(shooting));       
         }
 
         public void setMotorBrake(boolean brake) {
