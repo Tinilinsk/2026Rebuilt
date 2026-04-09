@@ -21,6 +21,12 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "IntakeDrop"
+                }
+              },
+              {
                 "type": "path",
                 "data": {
                   "pathName": "Left fuel"
@@ -38,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left to shoot"
+            "pathName": "Rotate"
           }
         },
         {
@@ -51,6 +57,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Blue",
+  "folder": null,
   "choreoAuto": false
 }
